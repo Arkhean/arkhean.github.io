@@ -1,0 +1,12 @@
+:root {
+    --accent: #3ddc84;
+}
+
+html {
+    font-size: 17px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
