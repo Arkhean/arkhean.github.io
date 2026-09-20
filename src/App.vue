@@ -1,20 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref, type Component } from 'vue'
 import About from './components/About.vue'
 import ExperienceList from './components/ExperienceList.vue'
 import EducationList from './components/EducationList.vue'
 import ProjectList from './components/ProjectList.vue'
 import Contact from './components/Contact.vue'
 
-const sections = [
-    { id: 'about', label: 'À propos' },
-    { id: 'experience', label: 'Expérience' },
-    { id: 'education', label: 'Formation' },
-    { id: 'projects', label: 'Projets' },
-    { id: 'contact', label: 'Contact' },
+const sections: { id: string; label: string; component: Component }[] = [
+    { id: 'about', label: 'À propos', component: About },
+    { id: 'experience', label: 'Expérience', component: ExperienceList },
+    { id: 'education', label: 'Formation', component: EducationList },
+    { id: 'projects', label: 'Projets', component: ProjectList },
+    { id: 'contact', label: 'Contact', component: Contact },
 ]
 
 const activeSection = ref('about')
+const activeComponent = computed(() => sections.find((s) => s.id === activeSection.value)?.component)
 </script>
 
 <template>
@@ -40,20 +41,8 @@ const activeSection = ref('about')
         </aside>
 
         <main class="content">
-            <section v-if="activeSection === 'about'">
-                <About />
-            </section>
-            <section v-else-if="activeSection === 'experience'">
-                <ExperienceList />
-            </section>
-            <section v-else-if="activeSection === 'education'">
-                <EducationList />
-            </section>
-            <section v-else-if="activeSection === 'projects'">
-                <ProjectList />
-            </section>
-            <section v-else-if="activeSection === 'contact'">
-                <Contact />
+            <section>
+                <component :is="activeComponent" />
             </section>
         </main>
     </div>
@@ -135,8 +124,52 @@ const activeSection = ref('about')
 
 .content {
     flex: 1;
+    min-width: 0;
     padding: 2rem 3rem;
     box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        flex: none;
+        position: static;
+        height: auto;
+        gap: 1.5rem;
+        padding: 1.5rem 1rem;
+        border-right: none;
+        border-bottom: 1px solid #222;
+    }
+
+    .photo {
+        width: 96px;
+        height: 96px;
+    }
+
+    .nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.25rem 1rem;
+    }
+
+    .nav-item {
+        font-size: 1rem;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        padding: 0.4rem 0.25rem;
+    }
+
+    .nav-item.active {
+        border-bottom-color: var(--accent);
+    }
+
+    .content {
+        padding: 1.5rem 1rem;
+    }
 }
 
 </style>

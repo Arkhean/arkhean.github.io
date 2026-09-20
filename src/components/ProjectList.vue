@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ProjectItem from './ProjectItem.vue'
-import TypeText from './TypeText.vue'
+import SectionList from './SectionList.vue'
 
 interface Project {
     title: string
@@ -50,26 +50,14 @@ const projects: Project[] = [
 </script>
 
 <template>
-    <h2><TypeText text="Projets personnels" /></h2>
-    <p>Surtout un ensemble de curiosités car je suis un peu touche-à-tout, c'est pour ça qu'il n'y a pas que du Python.</p>
-    <div class="project-list">
+    <SectionList title="Projets personnels">
+        <template #intro>
+            <p>Surtout un ensemble de curiosités car je suis un peu touche-à-tout, c'est pour ça qu'il n'y a pas que du Python.</p>
+        </template>
         <ProjectItem
             v-for="project in projects"
             :key="project.url"
             v-bind="project"
         />
-    </div>
+    </SectionList>
 </template>
-
-<style scoped>
-
-h2 {
-    color: var(--accent);
-}
-
-.project-list {
-    margin-top: 1.5rem;
-    margin-right: 20%;
-}
-
-</style>

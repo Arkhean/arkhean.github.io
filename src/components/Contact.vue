@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TypeText from './TypeText.vue'
+import SectionTitle from './SectionTitle.vue'
 </script>
 
 <template>
-    <h2><TypeText text="Contact" /></h2>
+    <SectionTitle text="Contact" />
     <div class="contact-content">
         <p class="contact-text">
             N'hésitez pas à me contacter via LinkedIn.
@@ -20,10 +20,6 @@ import TypeText from './TypeText.vue'
 </template>
 
 <style scoped>
-
-h2 {
-    color: var(--accent);
-}
 
 .contact-content {
     display: flex;

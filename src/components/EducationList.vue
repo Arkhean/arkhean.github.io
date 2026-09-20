@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import EducationItem from './EducationItem.vue'
-import TypeText from './TypeText.vue'
+import SectionList from './SectionList.vue'
 
 interface Education {
     degree: string
@@ -32,25 +32,11 @@ const educations: Education[] = [
 </script>
 
 <template>
-    <h2><TypeText text="Formation" /></h2>
-    <div class="education-list">
+    <SectionList title="Formation">
         <EducationItem
             v-for="education in educations"
             :key="education.degree + education.school"
             v-bind="education"
         />
-    </div>
+    </SectionList>
 </template>
-
-<style scoped>
-
-h2 {
-    color: var(--accent);
-}
-
-.education-list {
-    margin-top: 1.5rem;
-    margin-right: 20%;
-}
-
-</style>

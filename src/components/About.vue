@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TypeText from './TypeText.vue'
+import SectionTitle from './SectionTitle.vue'
 </script>
 
 <template>
-    <h2><TypeText text="À propos" /></h2>
+    <SectionTitle text="À propos" />
     <div class="about-content">
         <p class="about-text">
             Activement à la recherche d'un nouveau poste à Lille ou Full Remote, je suis <strong>Développeur Python</strong>
@@ -41,10 +41,6 @@ import TypeText from './TypeText.vue'
 
 <style scoped>
 
-h2 {
-    color: var(--accent);
-}
-
 .about-content {
     display: flex;
     gap: 3rem;
@@ -76,6 +72,13 @@ h2 {
 .about-facts dd {
     margin: 0.25rem 0 0;
     color: #eee;
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
 }
 
 </style>

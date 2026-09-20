@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import ItemCard from './ItemCard.vue'
+import StackTags from './StackTags.vue'
+
 defineProps<{
     title: string
     company: string
@@ -14,17 +17,8 @@ function parseBold(text: string) {
 </script>
 
 <template>
-    <article class="experience-item">
-        <div class="experience-header">
-            <div>
-                <h3>{{ title }}</h3>
-                <p class="company">{{ company }}</p>
-            </div>
-            <p class="period">{{ period }}</p>
-        </div>
-        <ul class="stack">
-            <li v-for="tech in stack" :key="tech">{{ tech }}</li>
-        </ul>
+    <ItemCard :title="title" :subtitle="company" :date="period">
+        <StackTags :stack="stack" />
         <h4>Contexte</h4>
         <p class="context">{{ context }}</p>
         <h4>Réalisations</h4>
@@ -36,45 +30,10 @@ function parseBold(text: string) {
                 </template>
             </li>
         </ul>
-
-    </article>
+    </ItemCard>
 </template>
 
 <style scoped>
-
-.experience-item {
-    padding: 1.25rem 0;
-    border-bottom: 2px solid #333;
-}
-
-.experience-item:last-child {
-    border-bottom: none;
-}
-
-.experience-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-}
-
-.experience-header h3 {
-    margin: 0;
-    font-size: 1.05rem;
-}
-
-.company {
-    margin: 0.15rem 0 0;
-    color: #aaa;
-    font-size: 0.9rem;
-}
-
-.period {
-    margin: 0;
-    color: #888;
-    font-size: 0.85rem;
-    white-space: nowrap;
-}
 
 .context {
     margin: 0.6rem 0 0;
@@ -95,23 +54,6 @@ function parseBold(text: string) {
 
 .achievements strong {
     color: white;
-}
-
-.stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 1rem 0 0;
-    padding: 0;
-    list-style: none;
-}
-
-.stack li {
-    padding: 0.2rem 0.6rem;
-    border: 1px solid var(--accent);
-    border-radius: 999px;
-    color: var(--accent);
-    font-size: 0.9rem;
 }
 
 </style>

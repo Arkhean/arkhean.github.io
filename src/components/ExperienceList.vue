@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ExperienceItem from './ExperienceItem.vue'
-import TypeText from './TypeText.vue'
+import SectionList from './SectionList.vue'
 
 interface Experience {
     title: string
@@ -48,25 +48,11 @@ const experiences: Experience[] = [
 </script>
 
 <template>
-    <h2><TypeText text="Expérience" /></h2>
-    <div class="experience-list">
+    <SectionList title="Expérience">
         <ExperienceItem
             v-for="experience in experiences"
             :key="experience.title + experience.company"
             v-bind="experience"
         />
-    </div>
+    </SectionList>
 </template>
-
-<style scoped>
-
-h2 {
-    color: var(--accent);
-}
-
-.experience-list {
-    margin-top: 1.5rem;
-    margin-right: 20%;
-}
-
-</style>
